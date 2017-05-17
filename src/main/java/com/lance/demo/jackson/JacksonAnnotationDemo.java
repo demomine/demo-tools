@@ -3,6 +3,7 @@ package com.lance.demo.jackson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.lance.demo.jackson.annotation.EncryptFieldIntro;
 import com.lance.demo.jackson.model.*;
 
 import java.util.Arrays;
@@ -55,5 +56,31 @@ public class JacksonAnnotationDemo {
     public String jsonSerial() throws JsonProcessingException {
         JsonSerialModel jsonSerialModel = new JsonSerialModel("lance", new Date(), Arrays.asList("a1","a2","a3"));
         return objectMapper.writeValueAsString(jsonSerialModel);
+    }
+
+    public String jsonAll() throws JsonProcessingException {
+        JsonAllModel<PayModel> jsonAllModel = new JsonAllModel<>();
+        PayModel payModel = new PayModel();
+        payModel.setTransNo("1234567A");
+        payModel.setTransMoney("1.23");
+        payModel.setToAccName("周小忍");
+        payModel.setToAccNo("6222601234567890");
+        payModel.setToBankName("工商银行");
+        payModel.setToProName("上海市");
+        payModel.setToCityName("上海市");
+        payModel.setToAccDept("张江支行");
+        payModel.setTransCardId("22032319930425218X");
+        payModel.setTransMobile("18217550000");
+        jsonAllModel.setDataContent(payModel);
+        return new ObjectMapper().writeValueAsString(jsonAllModel);
+
+    }
+
+    public String jsonCustomer() throws JsonProcessingException {
+        //objectMapper.setAnnotationIntrospector(new EncryptFieldIntro());
+        JsonCustomerSerializeModel jsonCustomerSerializeModel = new JsonCustomerSerializeModel("lance",new InnerModel("aaa",30));
+        jsonCustomerSerializeModel.setOrgCode("org1");
+        jsonCustomerSerializeModel.setProductCode("product1");
+        return objectMapper.writeValueAsString(jsonCustomerSerializeModel);
     }
 }

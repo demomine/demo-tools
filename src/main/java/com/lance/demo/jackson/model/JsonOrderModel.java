@@ -8,7 +8,7 @@ import lombok.Data;
  * Created by perdonare on 2017/5/15.
  */
 @Data
-//@JsonPropertyOrder({"age","id","name"})
+//@JsonPropertyOrder({"age","id","localName"})
 @JsonPropertyOrder(alphabetic = true)
 public class JsonOrderModel {
     public JsonOrderModel(int id, String name,int age) {

@@ -14,7 +14,7 @@ public class JsonGetterModel {
     public int id;
     private String name;
 
-    @JsonGetter("name")
+    @JsonGetter("localName")
     public String getTheName() {
         return name;
     }

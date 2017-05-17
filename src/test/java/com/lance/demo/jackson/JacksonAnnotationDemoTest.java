@@ -29,42 +29,55 @@ public class JacksonAnnotationDemoTest {
     public void jsonGetter() throws Exception {
         String result = jacksonAnnotationDemo.jsonGetter();
         System.out.println("result:  " + result);
-        assertTrue(result.contains("name"));
+        assertTrue(result.contains("localName"));
     }
 
     @Test
     public void jsonOrder() throws Exception {
         String result = jacksonAnnotationDemo.jsonOrder();
         System.out.println("result:  " + result);
-        //assertTrue(result.contains("name"));
+        //assertTrue(result.contains("localName"));
     }
 
     @Test
     public void jsonRawValue() throws Exception {
         String result = jacksonAnnotationDemo.jsonRawValue();
         System.out.println("result:  " + result);
-        //assertTrue(result.contains("name"));
+        //assertTrue(result.contains("localName"));
     }
 
     @Test
     public void jsonValue() throws Exception {
         String result = jacksonAnnotationDemo.jsonValue();
         System.out.println("result:  " + result);
-        //assertTrue(result.contains("name"));
+        //assertTrue(result.contains("localName"));
     }
 
     @Test
     public void jsonRoot() throws Exception {
         String result = jacksonAnnotationDemo.jsonRoot();
         System.out.println("result:  " + result);
-        //assertTrue(result.contains("name"));
+        //assertTrue(result.contains("localName"));
     }
 
     @Test
     public void jsonSerial() throws Exception {
         String result = jacksonAnnotationDemo.jsonSerial();
         System.out.println("result:  " + result);
-        //assertTrue(result.contains("name"));
+        //assertTrue(result.contains("localName"));
     }
 
+    @Test
+    public void jsonAll() throws Exception {
+        String result = jacksonAnnotationDemo.jsonAll();
+        System.out.println("result:  " + result);
+        //assertTrue(result.contains("localName"));
+    }
+
+    @Test
+    public void jsonCustomer() throws Exception {
+        String result = jacksonAnnotationDemo.jsonCustomer();
+        System.out.println("result:  " + result);
+        //assertTrue(result.contains("localName"));
+    }
 }
