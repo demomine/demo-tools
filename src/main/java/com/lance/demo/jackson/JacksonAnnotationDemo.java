@@ -1,9 +1,13 @@
 package com.lance.demo.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.lance.demo.jackson.annotation.ContextualAndResolve;
 import com.lance.demo.jackson.annotation.EncryptFieldIntro;
+import com.lance.demo.jackson.annotation.EncryptFieldSerializer;
 import com.lance.demo.jackson.model.*;
 
 import java.util.Arrays;
@@ -77,10 +81,59 @@ public class JacksonAnnotationDemo {
     }
 
     public String jsonCustomer() throws JsonProcessingException {
-        //objectMapper.setAnnotationIntrospector(new EncryptFieldIntro());
+        // objectMapper.setAnnotationIntrospector(new EncryptFieldIntro());
         JsonCustomerSerializeModel jsonCustomerSerializeModel = new JsonCustomerSerializeModel("lance",new InnerModel("aaa",30));
         jsonCustomerSerializeModel.setOrgCode("org1");
         jsonCustomerSerializeModel.setProductCode("product1");
+
+        SimpleModule module = new SimpleModule("test", Version.unknownVersion());
+        module.addSerializer(Object.class, new EncryptFieldSerializer("org1","pro1",null,null));
+        objectMapper.registerModule(module);
         return objectMapper.writeValueAsString(jsonCustomerSerializeModel);
+    }
+    //缺点:需要定制类型
+    public String jsonContextualByType() throws JsonProcessingException {
+        // objectMapper.setAnnotationIntrospector(new EncryptFieldIntro());
+        JsonContextModel jsonContextModel = new JsonContextModel("lance", 20,new EncryptObject("model"));
+        JsonContextModel2 jsonContextModel2 = new JsonContextModel2("lance2", 21,new EncryptObject("model2"));
+        SimpleModule simpleModule = new SimpleModule("test", Version.unknownVersion());
+        simpleModule.addSerializer(EncryptObject.class,new ContextualAndResolve("org", "product", "biz",null));
+        objectMapper.registerModule(simpleModule);
+        //objectMapper.
+        String result =  objectMapper.writeValueAsString(jsonContextModel);
+        String result1 =  objectMapper.writeValueAsString(jsonContextModel2);
+        return result+result1;
+    }
+    //缺点:不能动态注入属性
+    public String jsonContextualByAnnotation() throws JsonProcessingException {
+        EncryptSerialModel encryptSerialModel = new EncryptSerialModel("lance", 20, "encrypt");
+        EncryptSerialModel2 encryptSerialModel2 = new EncryptSerialModel2("lance2", 22, "encrypt2");
+        String result1 = objectMapper.writeValueAsString(encryptSerialModel);
+        String result2 = objectMapper.writeValueAsString(encryptSerialModel2);
+
+        //objectMapper.set
+
+        return result1 + result2;
+
+    }
+
+    //缺点:不能动态注入属性
+    public String jsonCustomerProvider() throws JsonProcessingException {
+        EncryptSerializerProvider encryptSerializerProvider  = new EncryptSerializerProvider("orgCode","advance");
+        objectMapper.setSerializerProvider(encryptSerializerProvider);
+        EncryptSerialModel encryptSerialModel = new EncryptSerialModel("lance", 20, "encrypt");
+        EncryptSerialModel2 encryptSerialModel2 = new EncryptSerialModel2("lance2", 22, "encrypt2");
+        String result1 = objectMapper.writeValueAsString(encryptSerialModel);
+        String result2 = objectMapper.writeValueAsString(encryptSerialModel2);
+        return result1 + result2;
+
+    }
+
+    public String jsonExtend() throws JsonProcessingException {
+        //objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
+        SubModel subModel = new SubModel("lance", 20);
+        subModel.setOrgCode("org");
+        subModel.setProductCode("product");
+        return objectMapper.writeValueAsString(subModel);
     }
 }

@@ -1,5 +1,6 @@
 package com.lance.demo.jackson;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lance.demo.jackson.model.JsonGetterModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,5 +80,30 @@ public class JacksonAnnotationDemoTest {
         String result = jacksonAnnotationDemo.jsonCustomer();
         System.out.println("result:  " + result);
         //assertTrue(result.contains("localName"));
+    }
+
+    @Test
+    public void jsonContext() throws Exception {
+        String result = jacksonAnnotationDemo.jsonContextualByType();
+        System.out.println("result:  " + result);
+        //assertTrue(result.contains("localName"));
+    }
+
+    @Test
+    public void jsonAnnotation() throws Exception {
+        String result = jacksonAnnotationDemo.jsonContextualByAnnotation();
+        System.out.println("result:  " + result);
+        //assertTrue(result.contains("localName"));
+    }
+    @Test
+    public void jsonCustomerProvider() throws Exception {
+        String result = jacksonAnnotationDemo.jsonCustomerProvider();
+        System.out.println("result:  " + result);
+        //assertTrue(result.contains("localName"));
+    }
+    @Test
+    public void jsonExtend() throws JsonProcessingException {
+        String result = jacksonAnnotationDemo.jsonExtend();
+        System.out.println("result:  " + result);
     }
 }

@@ -13,7 +13,7 @@ import lombok.Data;
 public class JsonCustomerSerializeModel extends CommonModel{
     //@PropertyEncrypt
     private String localName;
-    @PropertyEncrypt
+    //@PropertyEncrypt
     //@JsonRawValue
     private InnerModel innerModel;
 

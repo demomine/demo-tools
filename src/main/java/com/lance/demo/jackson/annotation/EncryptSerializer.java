@@ -16,9 +16,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 @JacksonAnnotationsInside
-@JacksonAnnotation
-//@JsonSerialize(using = EncryptFieldSerializer.class)
-public @interface PropertyEncrypt {
+@JsonSerialize(using = EncryptFieldSerializer.class)
+public @interface EncryptSerializer {
 
     EncryptMethod value() default EncryptMethod.AES;
 
