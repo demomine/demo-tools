@@ -1,11 +1,13 @@
 package com.lance.demo;
 
+import io.reactivex.Flowable;
+
 /**
  * Hello world!
  *
  */
 public class App {
     public static void main( String[] args ) {
-        System.out.println( "Hello World!" );
+        Flowable.just("Hello world").subscribe(System.out::println);
     }
 }
