@@ -10,6 +10,20 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <dependencies>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
 <dependencyManagement>
   <dependencies>
     <dependency>
@@ -81,10 +95,6 @@
   </dependencies>
 </dependencyManagement>
 
-
-  <developers>
-    <developer>perdornare</developer>
-  </developers>
 
   <build>
     <finalName>demo-tools</finalName>
